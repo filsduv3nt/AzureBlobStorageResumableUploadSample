@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BlobResumableUpload": {
+      "commandName": "Project",
+      "commandLineArgs": "/connectionstring \"BLOB STORAGE CONNECTIONSTRING\" /cn \"CONTAINERNAME\" /fn D:\\TEST1.jpg /bs 50"
+    }
+  }
+}

@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs.Specialized;
 using BlobResumableUpload.Model;
@@ -16,16 +15,22 @@ namespace BlobResumableUpload
         static async Task Main(string[] args)
         {
             var command = Args.Configuration.Configure<InputArguments>().CreateAndBind(args);
-
             string dateNow = DateTime.UtcNow.ToString("yyyyMMddHHmm");
             string storageAccountConnectionString = command.ConnectionString;
             string containerName = command.ContainerName;
             string fileName = command.FileName;
             int blockSize = command.BlockSize * 1024;
 
-            var blobContainerClient = new Azure.Storage.Blobs.BlobContainerClient(storageAccountConnectionString, containerName);
-            await blobContainerClient.CreateIfNotExistsAsync();
-            var blob = new Azure.Storage.Blobs.Specialized.BlockBlobClient(storageAccountConnectionString, containerName, $"{Path.GetFileName(fileName)}");
+            /////////////////////
+            ///BLOBSTORAGE SAS PERMISSION NEEDED!
+            //Blob
+            //Service/Object 
+            //Read/Write
+            /////////////////////
+            // TO PERFORM THIS OPERATION ALSO "List" PERMISSION IS NEEDED
+            //var blobContainerClient = new Azure.Storage.Blobs.BlobContainerClient(storageAccountConnectionString, containerName);
+            //await blobContainerClient.CreateIfNotExistsAsync();
+            var blob = new BlockBlobClient(storageAccountConnectionString, containerName, $"{Path.GetFileName(fileName)}");
             var response = default(Azure.Response<BlockList>);
 
             try
