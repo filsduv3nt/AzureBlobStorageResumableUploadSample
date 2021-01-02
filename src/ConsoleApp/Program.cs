@@ -27,7 +27,7 @@ namespace BlobResumableUpload
             //Service/Object 
             //Read/Write
             /////////////////////
-            // TO PERFORM THIS OPERATION ALSO "List" PERMISSION IS NEEDED
+            // TO PERFORM THIS OPERATION IS ALSO NEEDED "List" PERMISSION
             //var blobContainerClient = new Azure.Storage.Blobs.BlobContainerClient(storageAccountConnectionString, containerName);
             //await blobContainerClient.CreateIfNotExistsAsync();
             var blob = new BlockBlobClient(storageAccountConnectionString, containerName, $"{Path.GetFileName(fileName)}");
